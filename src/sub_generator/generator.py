@@ -106,8 +106,6 @@ def subtract_filename(string):
     return string.split("/")[-1].split(".")[0]
 
 
-
-
 def create_subtitles(path_to_file):
     enable_logs(True)
     new_path = convert_to_mono_wav(path_to_file, "../../res/tmp")

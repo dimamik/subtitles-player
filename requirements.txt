@@ -2,3 +2,4 @@ pydub~=0.25.1
 vosk~=0.3.21
 PyQt5~=5.15.4
 textblob~=0.15.3
+transformers~=4.4.2
