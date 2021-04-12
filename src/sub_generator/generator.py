@@ -86,11 +86,6 @@ def generate_subtitles(path_to_wav):
         if len(data) == 0:
             break
         rec.AcceptWaveform(data)
-        #     pass
-        #     # print(rec.Result())
-        # else:
-        #     pass
-        #     # print(rec.PartialResult())
     return rec.FinalResult()
 
 

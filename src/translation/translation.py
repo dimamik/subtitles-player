@@ -12,13 +12,18 @@ class Translator:
         500 requests per minute
         5000 characters per request
     """
-    MAX_REQUEST_LEN = 4500
 
-    def __init__(self, to_lang, from_lang='en'):  # TODO  from lang
+    def __init__(self, to_lang, from_lang='en', max_request_len=4500):
         self.to_lang = to_lang
+        self.MAX_REQUEST_LEN = max_request_len
 
-    # TODO To Remove Because breaks rule of 500 requests per minute
     def translate_dict(self, list_of_dicts, key):
+        """
+        Deprecated, translates without taking care of google limits
+        :param list_of_dicts:
+        :param key:
+        :return:
+        """
         for entry in list_of_dicts:
             entry[f"{key}_{self.to_lang}"] = self._translate_text(entry[key])
         return list_of_dicts
@@ -32,14 +37,20 @@ class Translator:
             logging.debug("There is a word the same as input " + text)
         return str(translated)
 
-    def translate_sentences_dict(self, sentences_dict_list):
-        requests = [""]
+    def translate_sentences_dict(self, sentences_dict_list, split_symbol="\n"):
+        """
+        Adds translated sentences to sentences_dict_list
+        :param sentences_dict_list:
+        :param split_symbol:
+        :return:  translated sentences dictionary
+        """
+        requests = []
 
         for entry in sentences_dict_list:
-            if len(entry) + len(requests[-1]) > self.MAX_REQUEST_LEN:
+            if len(requests) == 0 or len(entry) + len(requests[-1]) > self.MAX_REQUEST_LEN:
                 requests.append(entry['sentence'])
             else:
-                requests[-1] += "$" + entry['sentence']
+                requests[-1] += split_symbol + entry['sentence']
 
         respond = []
         for req in requests:
@@ -47,7 +58,8 @@ class Translator:
 
         index = 0
         for resp in respond:
-            resp = resp.split("$")
+            resp = resp.split(split_symbol)
+
             for sentence in resp:
                 sentences_dict_list[index][f"sentence_{self.to_lang}"] = sentence
                 index += 1
