@@ -16,7 +16,7 @@ class WindowInterface(QWidget):
             "background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(158, 61, 103, 255), stop:0.509465 rgba(158, 57, 135, 255), stop:1 rgba(117, 60, 158, 255));}"
             "")
         self.layout1 = QVBoxLayout()
-        picButton = PicButton("res/1.png", "res/1.png", "res/1.png")
+        picButton = PicButton("resources/1.png", "resources/1.png", "resources/1.png")
         self.layout1.addWidget(picButton, 0, Qt.AlignRight | Qt.AlignTop)
         picButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setLayout(self.layout1)

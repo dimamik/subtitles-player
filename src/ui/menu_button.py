@@ -34,6 +34,6 @@ class PicButton(QAbstractButton):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    demo = PicButton("res/1.png", "res/1.png", "res/1.png")
+    demo = PicButton("resources/1.png", "resources/1.png", "resources/1.png")
     demo.show()
     sys.exit(app.exec_())

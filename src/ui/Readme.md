@@ -1,2 +1,2 @@
 ### Vision of the ui:
-![alt text](res/diagram.png)
+![alt text](resources/diagram.png)
