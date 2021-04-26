@@ -1,9 +1,9 @@
 import sys
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QApplication, QHBoxLayout, QSizePolicy, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QApplication, QSizePolicy, QVBoxLayout
 
-from src.ui.menu_button import PicButton
+from src.ui.resources.res_manager import ResourcesManager
 
 
 class WindowInterface(QWidget):
@@ -15,11 +15,11 @@ class WindowInterface(QWidget):
             "{background: rgb(222,97,218);"
             "background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(158, 61, 103, 255), stop:0.509465 rgba(158, 57, 135, 255), stop:1 rgba(117, 60, 158, 255));}"
             "")
-        self.layout1 = QVBoxLayout()
-        picButton = PicButton("resources/1.png", "resources/1.png", "resources/1.png")
-        self.layout1.addWidget(picButton, 0, Qt.AlignRight | Qt.AlignTop)
-        picButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.setLayout(self.layout1)
+        self.layout = QVBoxLayout()
+        button = ResourcesManager.get_menu_button()
+        self.layout.addWidget(button, 0, Qt.AlignRight | Qt.AlignTop)
+        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.setLayout(self.layout)
         self.showFullScreen()
 
     @staticmethod

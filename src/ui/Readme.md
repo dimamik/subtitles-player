@@ -1,2 +1,3 @@
 ### Vision of the ui:
-![alt text](resources/diagram.png)
+
+![alt text](resources/git/diagram.png)

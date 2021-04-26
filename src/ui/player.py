@@ -16,15 +16,27 @@ dictionary = parseClass.sentences_dict
 pos = 0
 
 
+class Test(QMediaPlayer):
+    def __init__(self):
+        super(Test, self).__init__()
+        QMediaPlayer.durationChanged.connect(self.a)
+        mp = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        mp.durationChanged.connect(self.a)
+
+    def a(self):
+        return 1
+
+
 class VideoPlayer(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("PyQt5 Video Player")
 
         self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        stream = self.mediaPlayer.mediaStream()
+        # stream = self.mediaPlayer.mediaStream()
         videoWidget = QVideoWidget()
 
+        ### =====================
         self.playButton = QPushButton()
         self.playButton.setEnabled(False)
         self.playButton.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
@@ -58,12 +70,12 @@ class VideoPlayer(QMainWindow):
         layout.addLayout(controlLayout)
         layout.addWidget(self.error)
         layout.addWidget(openButton)
-
+        ### ===================
         # Set widget to contain window contents
         wid.setLayout(layout)
 
         self.mediaPlayer.setVideoOutput(videoWidget)
-        self.mediaPlayer.stateChanged.connect(self.mediaStateChanged)
+        self.mediaPlayer.stateChanged.connect(self.sth)
         self.mediaPlayer.positionChanged.connect(self.positionChanged)
         self.mediaPlayer.durationChanged.connect(self.durationChanged)
         self.mediaPlayer.error.connect(self.handleError)
@@ -79,6 +91,9 @@ class VideoPlayer(QMainWindow):
 
     def exitCall(self):
         sys.exit(app.exec_())
+
+    def sth(self):
+        return 1
 
     def play(self):
         if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
