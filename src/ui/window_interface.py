@@ -20,7 +20,7 @@ class WindowInterface(QWidget):
         self.layout.addWidget(button, 0, Qt.AlignRight | Qt.AlignTop)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         # self.setLayout(self.layout)
-        self.showFullScreen()
+        # self.showFullScreen()
 
     @staticmethod
     def show_itself(window):

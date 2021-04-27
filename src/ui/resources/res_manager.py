@@ -18,3 +18,11 @@ class ResourcesManager:
     @staticmethod
     def get_pause_icon():
         return QIcon(f"{dirname}\\buttons\\state_pause.png")
+
+    @staticmethod
+    def get_flip_icon():
+        return QIcon(f"{dirname}\\buttons\\flip_button.png")
+
+    @staticmethod
+    def get_save_icon():
+        return QIcon(f"{dirname}\\buttons\\save.png")

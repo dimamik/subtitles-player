@@ -17,7 +17,7 @@ class VideoWindow(WindowInterface):
         self.video_widget = VideoWidget("D:\\Videos\\2021-03-24 08-01-42.mp4")
         self.video_widget.setStyleSheet("#video_widget{border: 10px solid;"
                                         "border-color: aqua;}")
-        self.control_panel = ControlPanel(self.video_widget)
+        self.control_panel = ControlPanel(self.video_widget.media_player)
         self.layout.addWidget(self.video_widget, 2)
         self.layout.addWidget(self.control_panel)
         self.setLayout(self.layout)
