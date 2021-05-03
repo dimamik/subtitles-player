@@ -23,6 +23,8 @@ class VideoWidget(QVideoWidget):
                 path_to_media
             )))
         self.media_player.setVideoOutput(self)
+        # TODO To Remove
+        self.media_player.setVolume(20)
         self.media_player.play()
 
 

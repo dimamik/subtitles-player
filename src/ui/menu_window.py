@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QWidget
+
 from src.ui.window_interface import WindowInterface
 
 
