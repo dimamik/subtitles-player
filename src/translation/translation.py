@@ -3,17 +3,23 @@ import logging
 from textblob import TextBlob
 from textblob.exceptions import NotTranslated
 
+from src.translation.prep_translation import ParseSubtitlesJson
+
 
 class Translator:
-    """
-    Uses Google Translations API with following restrictions:
-        500 requests per minute
-        5000 characters per request
-    """
 
-    def __init__(self, to_lang, from_lang='en', max_request_len=4500):
+    def __init__(self, to_lang, from_lang='en', _max_request_len=4500):
+        """
+        Uses Google Translations API with following restrictions:
+            500 requests per minute
+            5000 characters per request
+
+        :param to_lang: required language
+        :param from_lang: source language. Currently only English is supported due to ML limitations.
+        :param _max_request_len: maximum length of a request (depends on api)
+        """
         self.to_lang = to_lang
-        self.MAX_REQUEST_LEN = max_request_len
+        self.MAX_REQUEST_LEN = _max_request_len
 
     def translate_dict(self, list_of_dicts, key):
         """
@@ -63,8 +69,11 @@ class Translator:
                 index += 1
         return sentences_dict_list
 
-# if __name__ == '__main__':
-# parseClass = ParseSubtitlesJson("../../res/subtitles/19_min-sub-2021-04-05 22-26-39.022103.txt")
-# translator = Translator('pl')
-# sentences_dict = translator.translate_sentences_dict(parseClass.sentences_dict)
-# print(sentences_dict)
+
+if __name__ == '__main__':
+    parseClass = ParseSubtitlesJson("../../resources/subtitles/small_record-sub-2021-05-10-21-47-41.txt")
+    translator_pl = Translator('pl')
+    translator_ru = Translator('be')
+    translator_pl.translate_sentences_dict(parseClass.sentences_dict)
+    translator_ru.translate_sentences_dict(parseClass.sentences_dict)
+    print(parseClass.sentences_dict)

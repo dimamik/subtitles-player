@@ -1,5 +1,5 @@
 # Defined by user
-temp_files/logger/
+src/logger/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
