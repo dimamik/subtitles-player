@@ -1,44 +1,68 @@
 import os
 
-from src.ui.view.menu_button import PicButton, QIcon
-
-dirname = os.path.dirname(__file__)
+from src.ui.view.button import PicButton, QIcon
 
 
 class ResourcesManager:
+    dirname = os.path.dirname(__file__)
 
     @classmethod
     def get_menu_button(cls):
-        return PicButton(f"{dirname}\\menu\\1.png", f"{dirname}\\menu\\1.png", f"{dirname}\\menu\\1.png")
+        return PicButton(f"{ResourcesManager.dirname}\\menu\\1.png", f"{ResourcesManager.dirname}\\menu\\1.png",
+                         f"{ResourcesManager.dirname}\\menu\\1.png")
 
     @classmethod
     def get_play_icon(cls):
-        return QIcon(f"{dirname}\\buttons\\state_play.png")
+        return QIcon(f"{ResourcesManager.dirname}\\buttons\\state_play.png")
 
     @classmethod
     def get_pause_icon(cls):
-        return QIcon(f"{dirname}\\buttons\\state_pause.png")
+        return QIcon(f"{ResourcesManager.dirname}\\buttons\\state_pause.png")
 
     @classmethod
     def get_flip_icon(cls):
-        return QIcon(f"{dirname}\\buttons\\flip_button.png")
+        return QIcon(f"{ResourcesManager.dirname}\\buttons\\flip_button.png")
 
     @classmethod
     def get_save_icon(cls):
-        return QIcon(f"{dirname}\\buttons\\save.png")
+        return QIcon(f"{ResourcesManager.dirname}\\buttons\\save.png")
 
     @classmethod
     def get_resource(cls, res_name):
-        return f"{dirname}\\{res_name}"
+        return f"{ResourcesManager.dirname}\\{res_name}"
 
     @classmethod
     def get_flag(cls, country_shortcut):
-        return (f"{dirname}\\flags\\flag_{country_shortcut}.png",
-                f"{dirname}\\flags\\flag_{country_shortcut}.png",
-                f"{dirname}\\flags\\flag_{country_shortcut}_selected.png")
+        return (f"{ResourcesManager.dirname}\\flags\\flag_{country_shortcut}.png",
+                f"{ResourcesManager.dirname}\\flags\\flag_{country_shortcut}.png",
+                f"{ResourcesManager.dirname}\\flags\\flag_{country_shortcut}_selected.png")
 
     @classmethod
     def get_flag_pressed(cls, country_shortcut):
-        return (f"{dirname}\\flags\\flag_{country_shortcut}_selected.png",
-                f"{dirname}\\flags\\flag_{country_shortcut}_selected.png",
-                f"{dirname}\\flags\\flag_{country_shortcut}_selected.png")
+        return (f"{ResourcesManager.dirname}\\flags\\flag_{country_shortcut}_selected.png",
+                f"{ResourcesManager.dirname}\\flags\\flag_{country_shortcut}_selected.png",
+                f"{ResourcesManager.dirname}\\flags\\flag_{country_shortcut}_selected.png")
+
+    @classmethod
+    def get_user_learned(cls):
+        return f"{ResourcesManager.dirname}\\saved_subs\\saved.txt".replace("\\", "/")
+
+    @classmethod
+    def get_place_to_store_yt_videos(cls):
+        return f"{ResourcesManager.dirname}\\downloads_youtube"
+
+    @classmethod
+    def get_open_new_video_button(cls):
+        return PicButton(
+            f"{ResourcesManager.dirname}\\buttons\\open_new.png",
+            f"{ResourcesManager.dirname}\\buttons\\open_new.png",
+            f"{ResourcesManager.dirname}\\buttons\\open_new.png"
+        )
+
+    @classmethod
+    def get_open_saved_button(cls):
+        return PicButton(
+            f"{ResourcesManager.dirname}\\buttons\\saved.png",
+            f"{ResourcesManager.dirname}\\buttons\\saved.png",
+            f"{ResourcesManager.dirname}\\buttons\\saved.png"
+        )

@@ -1,5 +1,8 @@
+from datetime import datetime
+
 from PyQt5.QtWidgets import QLabel
 
+from resources.res_manager import ResourcesManager
 from src.translation.prep_translation import ParseSubtitlesJson
 from src.translation.translation import Translator
 
@@ -73,3 +76,15 @@ class Subtitles(QLabel):
             while self.current_position > 0 and new_position < self.dictionary[self.current_position]["start"]:
                 self.current_position -= 1
         return self.dictionary[self.current_position]
+
+    def write_subtitles_to_file(self):
+        now = datetime.now()
+        to_write = {
+            "date": now.strftime("%d/%m/%Y %H:%M:%S"),
+            "original_sentence": self.dictionary[self.current_position]["sentence"],
+            f"sentence_{self.to_lang}": self.dictionary[self.current_position][f"sentence_{self.to_lang}"]
+        }
+        with open(ResourcesManager.get_user_learned(), 'a', encoding='utf-8') as file:
+            print("opened")
+            file.write(str(to_write) + "\n")
+        print("ended")

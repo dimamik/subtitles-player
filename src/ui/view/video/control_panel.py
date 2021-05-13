@@ -12,7 +12,7 @@ class ControlPanel(QWidget):
         self.state_button = StateButton(player_wrapper)
         self.volume_bar = VolumeBar(player_wrapper)
         self.flip_subs_button = FlipSubsButton(player_wrapper, subtitles)
-        self.save_subs_button = SaveSubsButton(player_wrapper)
+        self.save_subs_button = SaveSubsButton(player_wrapper, subtitles)
         self.layout.addWidget(self.progress_bar)
         self.layout.addWidget(self.volume_bar)
         self.layout.addWidget(self.state_button)
@@ -26,6 +26,9 @@ class ControlPanel(QWidget):
         h_box = QHBoxLayout()
         h_box.setContentsMargins(0, 0, 0, 0)
         return h_box
+
+    def pause_video(self):
+        self.state_button.pause()
 
 
 class ProgressBar(QSlider):
@@ -173,13 +176,19 @@ class StateButton(Button):
 
     def change_state(self):
         if self.play_status:
-            self.setIcon(ResourcesManager.get_play_icon())
-            self.play_status = False
-            self.media_player.pause()
+            self.pause()
         else:
-            self.setIcon(ResourcesManager.get_pause_icon())
-            self.play_status = True
-            self.media_player.play()
+            self.play()
+
+    def pause(self):
+        self.setIcon(ResourcesManager.get_play_icon())
+        self.play_status = False
+        self.media_player.pause()
+
+    def play(self):
+        self.setIcon(ResourcesManager.get_pause_icon())
+        self.play_status = True
+        self.media_player.play()
 
 
 class FlipSubsButton(Button):
@@ -194,13 +203,15 @@ class FlipSubsButton(Button):
 
 
 class SaveSubsButton(Button):
-    def __init__(self, player_wrapper):
+    def __init__(self, player_wrapper, subtitles):
         super().__init__(ResourcesManager.get_save_icon())
+        self.subtitles = subtitles
         self.media_player = player_wrapper
         self.clicked.connect(self.save_subs)
 
     def save_subs(self):
         print("Woosh I am saving subs :D")
+        self.subtitles.write_subtitles_to_file()
 
 # if __name__ == '__main__':
 #     app = QApplication(sys.argv)

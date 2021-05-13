@@ -1,0 +1,8 @@
+{'date': '13/05/2021 22:16:33', 'original_sentence': " hello how are you i'm under the water", 'sentence_be': 'прывітанне, як ты, я пад вадой'}
+{'date': '13/05/2021 22:16:35', 'original_sentence': ' please help me get to my to be earning room', 'sentence_be': 'калі ласка, дапамажыце мне дабрацца да свайго, каб зарабіць'}
+{'date': '13/05/2021 22:16:36', 'original_sentence': ' please help me get to my to be earning room', 'sentence_be': 'калі ласка, дапамажыце мне дабрацца да свайго, каб зарабіць'}
+{'date': '13/05/2021 22:16:50', 'original_sentence': ' please help me get to my to be earning room', 'sentence_be': 'калі ласка, дапамажыце мне дабрацца да свайго, каб зарабіць'}
+{'date': '13/05/2021 22:16:50', 'original_sentence': ' please help me get to my to be earning room', 'sentence_be': 'калі ласка, дапамажыце мне дабрацца да свайго, каб зарабіць'}
+{'date': '13/05/2021 22:17:56', 'original_sentence': ' this is the best course you have ever had in your life', 'sentence_de': 'Dies ist der beste Kurs, den Sie jemals in Ihrem Leben hatten'}
+
+

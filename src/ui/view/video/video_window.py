@@ -5,11 +5,21 @@ from PyQt5.QtWidgets import QApplication
 from src.ui.view.video.control_panel import ControlPanel
 from src.ui.view.video.subtitles import Subtitles
 from src.ui.view.video.video_widget import VideoWidget
-from src.ui.view.window_interface import WindowInterface
+from src.ui.view.window_interface import WindowInterface, WindowType
 
 
 class VideoWindow(WindowInterface):
+    instance = None
+
+    @staticmethod
+    def get_instance():
+        """ Static access method. """
+        if VideoWindow.instance is None:
+            raise Exception("This class takes parameters!")
+        return VideoWindow.instance
+
     def __init__(self, path_to_media, subtitles_path, to_lang):
+        VideoWindow.instance = self
         super(VideoWindow, self).__init__()
 
         # self.v_box = QVBoxLayout()
@@ -29,6 +39,10 @@ class VideoWindow(WindowInterface):
         self.layout.addWidget(self.subtitles)
         self.layout.addWidget(self.control_panel)
         self.setLayout(self.layout)
+        self.window_type = WindowType.video
+
+    def pause_video(self):
+        self.control_panel.pause_video()
 
 
 if __name__ == '__main__':

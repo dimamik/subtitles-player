@@ -1,0 +1,159 @@
+{
+  "result" : [{
+      "conf" : 1.000000,
+      "end" : 2.190000,
+      "start" : 1.860000,
+      "word" : "hello"
+    }, {
+      "conf" : 1.000000,
+      "end" : 2.850000,
+      "start" : 2.190000,
+      "word" : "everybody"
+    }, {
+      "conf" : 1.000000,
+      "end" : 4.380000,
+      "start" : 4.050000,
+      "word" : "this"
+    }, {
+      "conf" : 1.000000,
+      "end" : 4.800000,
+      "start" : 4.410000,
+      "word" : "is"
+    }, {
+      "conf" : 1.000000,
+      "end" : 5.280000,
+      "start" : 5.190000,
+      "word" : "a"
+    }, {
+      "conf" : 1.000000,
+      "end" : 5.790000,
+      "start" : 5.280000,
+      "word" : "python"
+    }, {
+      "conf" : 1.000000,
+      "end" : 6.450000,
+      "start" : 5.790000,
+      "word" : "course"
+    }, {
+      "conf" : 1.000000,
+      "end" : 7.380000,
+      "start" : 7.110000,
+      "word" : "that"
+    }, {
+      "conf" : 1.000000,
+      "end" : 7.740000,
+      "start" : 7.410000,
+      "word" : "i"
+    }, {
+      "conf" : 1.000000,
+      "end" : 8.220000,
+      "start" : 7.950000,
+      "word" : "would"
+    }, {
+      "conf" : 1.000000,
+      "end" : 8.640000,
+      "start" : 8.220000,
+      "word" : "like"
+    }, {
+      "conf" : 1.000000,
+      "end" : 9.240000,
+      "start" : 8.730000,
+      "word" : "you"
+    }, {
+      "conf" : 1.000000,
+      "end" : 9.840000,
+      "start" : 9.660000,
+      "word" : "to"
+    }, {
+      "conf" : 1.000000,
+      "end" : 10.320000,
+      "start" : 9.840000,
+      "word" : "listen"
+    }, {
+      "conf" : 1.000000,
+      "end" : 10.890000,
+      "start" : 10.560000,
+      "word" : "right"
+    }, {
+      "conf" : 1.000000,
+      "end" : 11.280000,
+      "start" : 10.890000,
+      "word" : "now"
+    }, {
+      "conf" : 1.000000,
+      "end" : 12.930000,
+      "start" : 12.390000,
+      "word" : "without"
+    }, {
+      "conf" : 1.000000,
+      "end" : 13.440000,
+      "start" : 12.990000,
+      "word" : "any"
+    }, {
+      "conf" : 1.000000,
+      "end" : 14.370000,
+      "start" : 13.740000,
+      "word" : "doubts"
+    }, {
+      "conf" : 1.000000,
+      "end" : 15.330000,
+      "start" : 15.060000,
+      "word" : "this"
+    }, {
+      "conf" : 1.000000,
+      "end" : 15.570000,
+      "start" : 15.330000,
+      "word" : "is"
+    }, {
+      "conf" : 1.000000,
+      "end" : 15.750000,
+      "start" : 15.630000,
+      "word" : "the"
+    }, {
+      "conf" : 1.000000,
+      "end" : 16.110000,
+      "start" : 15.750000,
+      "word" : "best"
+    }, {
+      "conf" : 1.000000,
+      "end" : 16.710000,
+      "start" : 16.140000,
+      "word" : "course"
+    }, {
+      "conf" : 1.000000,
+      "end" : 17.190000,
+      "start" : 17.040000,
+      "word" : "you"
+    }, {
+      "conf" : 1.000000,
+      "end" : 17.370000,
+      "start" : 17.190000,
+      "word" : "have"
+    }, {
+      "conf" : 1.000000,
+      "end" : 17.820000,
+      "start" : 17.400000,
+      "word" : "ever"
+    }, {
+      "conf" : 1.000000,
+      "end" : 18.240000,
+      "start" : 17.910000,
+      "word" : "had"
+    }, {
+      "conf" : 1.000000,
+      "end" : 18.450000,
+      "start" : 18.300000,
+      "word" : "in"
+    }, {
+      "conf" : 1.000000,
+      "end" : 18.660000,
+      "start" : 18.450000,
+      "word" : "your"
+    }, {
+      "conf" : 1.000000,
+      "end" : 19.050000,
+      "start" : 18.660000,
+      "word" : "life"
+    }],
+  "text" : "hello everybody this is a python course that i would like you to listen right now without any doubts this is the best course you have ever had in your life"
+}

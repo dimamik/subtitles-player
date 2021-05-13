@@ -1,4 +1,5 @@
 import logging
+import sys
 
 from textblob import TextBlob
 from textblob.exceptions import NotTranslated
@@ -28,8 +29,10 @@ class Translator:
         :param key:
         :return:
         """
+        print("TRANSLATING!!")
         for entry in list_of_dicts:
             entry[f"{key}_{self.to_lang}"] = self._translate_text(entry[key])
+        print("ENDED TRANSLATING!")
         return list_of_dicts
 
     def _translate_text(self, text):
@@ -39,6 +42,8 @@ class Translator:
             translated = blob.translate(to=self.to_lang)
         except NotTranslated:
             logging.debug("There is a word the same as input " + text)
+        except Exception:
+            logging.error("HTTP error:", sys.exc_info()[0])
         return str(translated)
 
     def translate_sentences_dict(self, sentences_dict_list, split_symbol="\n"):

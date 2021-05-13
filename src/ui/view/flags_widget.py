@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QGroupBox, QPushButton
 
 from resources.res_manager import ResourcesManager
-from src.ui.view.menu_button import QIcon, QSize
+from src.ui.view.button import QIcon, QSize
 
 
 class FlagsWidget(QWidget):
