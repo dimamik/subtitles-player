@@ -8,8 +8,10 @@ class YoutubeDownloader:
     @classmethod
     def download_video(cls, youtube_url):
         youtube = pytube.YouTube(youtube_url)
-        video = youtube.streams.first()
-
+        try:
+            video = youtube.streams.otf(False).first()
+        except Exception as ex:
+            print(ex)
         video.download(ResourcesManager.get_place_to_store_yt_videos())
         print("SUCCESS ON DOWNLOAD!")
         to_ret = ResourcesManager.get_place_to_store_yt_videos() + "\\" + youtube.streams[0].default_filename

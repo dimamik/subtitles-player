@@ -45,7 +45,7 @@ class ParseSubtitlesJson:
         :return:
         """
         if not os.path.isfile(path_to_json):
-            logging.error("File does not exist")
+            logging.error("File to json in prep translation does not exist: " + path_to_json)
             exit(-1)
         with open(path_to_json) as json_file:
             data = json.load(json_file)

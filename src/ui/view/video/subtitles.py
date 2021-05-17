@@ -3,8 +3,6 @@ from datetime import datetime
 from PyQt5.QtWidgets import QLabel
 
 from resources.res_manager import ResourcesManager
-from src.translation.prep_translation import ParseSubtitlesJson
-from src.translation.translation import Translator
 
 
 class Subtitles(QLabel):
@@ -12,13 +10,12 @@ class Subtitles(QLabel):
         super(Subtitles, self).__init__()
         self.subs_path = subs_path
         self.to_lang = to_lang
-        self.parseClass = ParseSubtitlesJson(subs_path)
-        self.dictionary = self.parseClass.sentences_dict
-        self.translator = Translator(to_lang)
-        self.dictionary = self.translator.translate_dict(self.dictionary, "sentence")
+        self.parseClass = None  # ParseSubtitlesJson(subs_path)
+        self.translator = None  # Translator(to_lang)
+        self.dictionary = None  # self.parseClass.sentences_dict
+        # self.dictionary = self.translator.translate_sentences_dict(self.dictionary)
         self.show_english = False
 
-        print(len(self.dictionary))
         self.setStyleSheet("""
         Subtitles{
             font-size: 20px;
@@ -47,7 +44,6 @@ class Subtitles(QLabel):
         new_position = float(new_position / 1000)
         if not self.check_if_position_in_range(new_position):
             subtitles = self.get_subtitles_instance(new_position)
-            # TODO Add var to flip subs and select language
             if not self.show_english:
                 self.setText(subtitles[f"sentence_{self.to_lang}"])
             else:
@@ -56,7 +52,6 @@ class Subtitles(QLabel):
     def lang_changed(self):
         self.show_english = not self.show_english
         subtitles = self.dictionary[self.current_position]
-        # TODO Add var to flip subs and select language
         if not self.show_english:
             self.setText(subtitles[f"sentence_{self.to_lang}"])
         else:

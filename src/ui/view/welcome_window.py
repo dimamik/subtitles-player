@@ -1,13 +1,12 @@
-import sys
-
-from PyQt5.QtCore import Qt, QThread, pyqtSignal
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter
-from PyQt5.QtWidgets import QLabel, QVBoxLayout, QApplication, QWidget, QStyleOption, QStyle
+from PyQt5.QtWidgets import QLabel, QVBoxLayout, QWidget, QStyleOption, QStyle
 
-from src.sub_generator.generator import SubtitlesGenerator
 from src.ui.view.flags_widget import FlagsWidget
+from src.ui.view.video.subtitles import Subtitles
 from src.ui.view.video.video_window import VideoWindow
 from src.ui.view.window_interface import WindowInterface, WindowType
+from src.ui.view_model.welcome_window_vm import WelcomeWindowVM
 from src.youtube_downloader.youtube_downloader import YoutubeDownloader
 
 
@@ -49,7 +48,7 @@ class ErrorLabel(QLabel):
 class LoadingWidget(QWidget):
     def __init__(self):
         super(LoadingWidget, self).__init__()
-        pass
+        pass  # TODO
 
 
 class WelcomeMessage(QLabel):
@@ -89,28 +88,6 @@ class InputField(QWidget):
         self.style().drawPrimitive(QStyle.PE_Widget, o, p, self)
 
 
-class Worker(QThread):
-    output = pyqtSignal(str, name="output")
-
-    def __init__(self):
-        super(Worker, self).__init__()
-        self.exiting = False
-        self.path = ""
-
-    def __del__(self):
-        self.exiting = True
-
-    def render(self, path):
-        self.path = path
-        self.start()
-
-    def run(self):
-        """Long-running task."""
-        # TODO Warning USING LOGIC IN VIEW!
-        res = SubtitlesGenerator.create_subtitles(self.path)
-        self.output.emit(res)
-
-
 class WelcomeWindow(WindowInterface):
     __instance = None
 
@@ -131,9 +108,7 @@ class WelcomeWindow(WindowInterface):
         self.inputField = InputField()
         self.welcomeMessage = WelcomeMessage()
         self.flagsWidget = FlagsWidget()
-
-        self.thread = Worker()
-        # self.textLabel = FileLabel()
+        self.welcomeWindowVM = WelcomeWindowVM(self)
         self.layout.addWidget(self.welcomeMessage, 15, Qt.AlignTop)
         self.layout.addWidget(self.flagsWidget)
         self.layout.addWidget(self.inputField, 30, Qt.AlignCenter)
@@ -142,6 +117,7 @@ class WelcomeWindow(WindowInterface):
         self.file_path = ""
         self.video_window = None
         self.window_type = WindowType.welcome
+        self.subtitles = None
 
     def dragEnterEvent(self, event):
         event.accept()
@@ -151,32 +127,43 @@ class WelcomeWindow(WindowInterface):
         url = str(event.mimeData().urls()[0].toString())
 
         if YoutubeDownloader.is_yt_link(url):
-            print("yt")
-            print(url)
-            self.file_path = YoutubeDownloader.download_video(url)
+            # self.file_path = YoutubeDownloader.download_video(url)
+            self.welcomeWindowVM.run_thread_download_from_yt(url)
         else:
-            print("not_yt")
             self.file_path = event.mimeData().urls()[0].toLocalFile()
-        print(self.file_path)
-        self.thread.render(self.file_path)
-        self.thread.output.connect(self.thread_finished)
+            self.welcomeWindowVM.run_thread_create_subtitles(self.file_path)
         event.accept()
 
-    def thread_finished(self, arg):
+    def finish_download_from_yt(self, path):
+        self.file_path = path
+        self.welcomeWindowVM.run_thread_create_subtitles(self.file_path)
+
+    def finish_create_subtitles(self, path_to_subs):
         print(self.file_path)
-        self.video_window = VideoWindow(self.file_path, arg,
-                                        to_lang=self.flagsWidget.flag)
-        self.video_window.show()
-        self.hide()
+        # self.video_window = VideoWindow(self.file_path, path_to_subs,
+        #                                 to_lang=self.flagsWidget.flag)
+        # self.video_window.show()
+        # self.hide()
+        self.subtitles = Subtitles(path_to_subs, to_lang=self.flagsWidget.flag)
+        self.welcomeWindowVM.run_thread_parse_and_translate_subtitles(
+            self.subtitles)
+
         # self.close()
 
-    @staticmethod
-    def show_itself(window):
-        app = QApplication(sys.argv)
-        demo = window()
-        demo.show()
-        sys.exit(app.exec_())
+    def finish_translate_subtitles(self, *args):
+        self.video_window = VideoWindow(self.file_path, self.subtitles)
+        self.video_window.show()
+        self.hide()
+        self.close()
+
+    # @staticmethod
+    # def show_itself(window):
+    #     app = QApplication(sys.argv)
+    #     demo = window()
+    #     demo.show()
+    #     sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
+    # loggerConfig('mystring.log')
     WelcomeWindow.show_itself(WelcomeWindow)

@@ -29,7 +29,7 @@ class Translator:
         :param key:
         :return:
         """
-        print("TRANSLATING!!")
+        print("TRANSLATING")
         for entry in list_of_dicts:
             entry[f"{key}_{self.to_lang}"] = self._translate_text(entry[key])
         print("ENDED TRANSLATING!")
