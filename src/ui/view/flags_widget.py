@@ -9,11 +9,11 @@ class FlagsWidget(QWidget):
         super(FlagsWidget, self).__init__()
         self.horizontalGroupBox = QGroupBox("Grid")
         layout = QGridLayout()
-
         self.state_clicked = "be"
-        self.setFixedWidth(220)
-        self.setFixedHeight(110)
+        self.setFixedWidth(440)
+        self.setFixedHeight(55)
 
+        self.setContentsMargins(0, 0, 0, 0)
         self.button_dict = {
             'be': FlagButton('be', self),
             'de': FlagButton('de', self),
@@ -24,14 +24,9 @@ class FlagsWidget(QWidget):
         }
         self.button_dict[self.state_clicked].set()
         self.clicked_button = self.button_dict['be']
-        i = 0
-        j = 0
-        for key, val in self.button_dict.items():
-            layout.addWidget(val, j, i)
-            i += 1
-            if i == 3:
-                i = 0
-                j += 1
+
+        for index, (key, val) in enumerate(self.button_dict.items()):
+            layout.addWidget(val, 0, index)
 
         self.horizontalGroupBox.setLayout(layout)
         self.setLayout(layout)

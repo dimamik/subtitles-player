@@ -3,6 +3,7 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QLabel, QVBoxLayout, QWidget, QStyleOption, QStyle
 
 from src.ui.view.flags_widget import FlagsWidget
+from src.ui.view.learn_word_label import TextToLearn
 from src.ui.view.video.subtitles import Subtitles
 from src.ui.view.video.video_window import VideoWindow
 from src.ui.view.window_interface import WindowInterface, WindowType
@@ -54,14 +55,15 @@ class LoadingWidget(QWidget):
 class WelcomeMessage(QLabel):
     def __init__(self):
         super(WelcomeMessage, self).__init__()
-        self.setText("Welcome in Subtitles player\nPlace your file or a link in section below")
-
+        self.setText("Welcome in Subtitles player")
+        self.setFixedHeight(25)
         self.setStyleSheet('''
             WelcomeMessage{
             color: black;
-              font-family: 'Raleway',sans-serif; font-size: 30px; 
-             padding:0; margin: auto;
-              font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   }
+            text-align: center;
+            font-family: 'Raleway',sans-serif; font-size: 30px; 
+            padding:0px; margin: auto;
+            font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   }
         ''')
 
 
@@ -105,15 +107,23 @@ class WelcomeWindow(WindowInterface):
             WelcomeWindow.__instance = self
         super(WelcomeWindow, self).__init__()
         self.setAcceptDrops(True)
+        self.menu_box.button_open_new.setVisible(False)
         self.inputField = InputField()
         self.welcomeMessage = WelcomeMessage()
         self.flagsWidget = FlagsWidget()
+        self.textToLearn = TextToLearn()
         self.welcomeWindowVM = WelcomeWindowVM(self)
-        self.layout.addWidget(self.welcomeMessage, 15, Qt.AlignTop)
-        self.layout.addWidget(self.flagsWidget)
+        self.layout.addWidget(self.welcomeMessage, 15, Qt.AlignTop | Qt.AlignCenter)
+        self.layout.addWidget(self.flagsWidget, 15, Qt.AlignTop | Qt.AlignCenter)
+        self.layout.addWidget(self.textToLearn, 15, Qt.AlignTop | Qt.AlignCenter)
         self.layout.addWidget(self.inputField, 30, Qt.AlignCenter)
         self.setLayout(self.layout)
         self.output = ""
+        # self.setStyleSheet("""
+        # WelcomeWindow{
+        #     margin:0;
+        # }
+        # """)
         self.file_path = ""
         self.video_window = None
         self.window_type = WindowType.welcome

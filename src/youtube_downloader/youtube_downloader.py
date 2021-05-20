@@ -11,7 +11,7 @@ class YoutubeDownloader:
         try:
             video = youtube.streams.otf(False).first()
         except Exception as ex:
-            print(ex)
+            print("Our ex " + ex)
         video.download(ResourcesManager.get_place_to_store_yt_videos())
         print("SUCCESS ON DOWNLOAD!")
         to_ret = ResourcesManager.get_place_to_store_yt_videos() + "\\" + youtube.streams[0].default_filename

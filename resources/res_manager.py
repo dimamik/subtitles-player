@@ -66,3 +66,18 @@ class ResourcesManager:
             f"{ResourcesManager.dirname}\\buttons\\saved.png",
             f"{ResourcesManager.dirname}\\buttons\\saved.png"
         )
+
+    @classmethod
+    def read_saved_subs(cls):
+        import json
+        to_ret = []
+        with open(f"{ResourcesManager.dirname}/saved_subs/saved.txt", "r", encoding='utf8') as file:
+            lines = file.readlines()
+            for line in lines:
+                js = json.loads(line)
+                to_ret.append(js)
+        return list({v['original_sentence']: v for v in to_ret}.values())
+
+
+if __name__ == '__main__':
+    print(ResourcesManager.read_saved_subs())

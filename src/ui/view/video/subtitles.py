@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 from PyQt5.QtWidgets import QLabel
@@ -77,9 +78,9 @@ class Subtitles(QLabel):
         to_write = {
             "date": now.strftime("%d/%m/%Y %H:%M:%S"),
             "original_sentence": self.dictionary[self.current_position]["sentence"],
-            f"sentence_{self.to_lang}": self.dictionary[self.current_position][f"sentence_{self.to_lang}"]
-        }
+            "translated_sentence": self.dictionary[self.current_position][f"sentence_{self.to_lang}"],
+            "language": self.to_lang}
         with open(ResourcesManager.get_user_learned(), 'a', encoding='utf-8') as file:
             print("opened")
-            file.write(str(to_write) + "\n")
+            file.write(json.dumps(to_write) + "\n")
         print("ended")
