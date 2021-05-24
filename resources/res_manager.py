@@ -1,31 +1,14 @@
 import os
 
-from src.ui.view.button import PicButton, QIcon
+from src.ui.view.pic_button import PicButton, QIcon
 
 
 class ResourcesManager:
     dirname = os.path.dirname(__file__)
 
     @classmethod
-    def get_menu_button(cls):
-        return PicButton(f"{ResourcesManager.dirname}\\menu\\1.png", f"{ResourcesManager.dirname}\\menu\\1.png",
-                         f"{ResourcesManager.dirname}\\menu\\1.png")
-
-    @classmethod
-    def get_play_icon(cls):
-        return QIcon(f"{ResourcesManager.dirname}\\buttons\\state_play.png")
-
-    @classmethod
-    def get_pause_icon(cls):
-        return QIcon(f"{ResourcesManager.dirname}\\buttons\\state_pause.png")
-
-    @classmethod
-    def get_flip_icon(cls):
-        return QIcon(f"{ResourcesManager.dirname}\\buttons\\flip_button.png")
-
-    @classmethod
-    def get_save_icon(cls):
-        return QIcon(f"{ResourcesManager.dirname}\\buttons\\save.png")
+    def get_icon(cls, icon_name):
+        return QIcon(f"{ResourcesManager.dirname}\\buttons\\{icon_name}.png")
 
     @classmethod
     def get_resource(cls, res_name):
@@ -48,23 +31,17 @@ class ResourcesManager:
         return f"{ResourcesManager.dirname}\\saved_subs\\saved.txt".replace("\\", "/")
 
     @classmethod
+    def get_loading_gif(cls):
+        return f"{ResourcesManager.dirname}\\gifs\\loading.gif"
+
+    @classmethod
     def get_place_to_store_yt_videos(cls):
         return f"{ResourcesManager.dirname}\\downloads_youtube"
 
     @classmethod
-    def get_open_new_video_button(cls):
+    def get_return_button(cls):
         return PicButton(
-            f"{ResourcesManager.dirname}\\buttons\\open_new.png",
-            f"{ResourcesManager.dirname}\\buttons\\open_new.png",
-            f"{ResourcesManager.dirname}\\buttons\\open_new.png"
-        )
-
-    @classmethod
-    def get_open_saved_button(cls):
-        return PicButton(
-            f"{ResourcesManager.dirname}\\buttons\\saved.png",
-            f"{ResourcesManager.dirname}\\buttons\\saved.png",
-            f"{ResourcesManager.dirname}\\buttons\\saved.png"
+            *[f"{ResourcesManager.dirname}\\buttons\\return_button.png"] * 3
         )
 
     @classmethod
@@ -77,10 +54,6 @@ class ResourcesManager:
                 js = json.loads(line)
                 to_ret.append(js)
         return list({v['original_sentence']: v for v in to_ret}.values())
-
-    @classmethod
-    def get_loading_gif(cls):
-        return f"{ResourcesManager.dirname}\\gifs\\loading.gif"
 
 
 if __name__ == '__main__':

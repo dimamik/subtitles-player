@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QGroupBox, QPushButton
 
 from resources.res_manager import ResourcesManager
-from src.ui.view.button import QIcon, QSize
+from src.ui.view.pic_button import QIcon, QSize
 
 
 class FlagsWidget(QWidget):
@@ -54,15 +54,15 @@ class FlagButton(QPushButton):
         self.setCheckable(True)
 
         self.setStyleSheet("""   
-      FlagButton{
-        animation : none;
-        backface-visibility : visible;
-        background : 0;
-        margin: 0;
-        padding:0;
-        background-attachment : scroll;
-        background-color : transparent;
-        }
+          FlagButton{
+                animation : none;
+                backface-visibility : visible;
+                background : 0;
+                margin: 0;
+                padding:0;
+                background-attachment : scroll;
+                background-color : transparent;
+            }
             """)
 
         self.setIconSize(QSize(100, 150))
@@ -71,11 +71,7 @@ class FlagButton(QPushButton):
         self.flag_widget.country_changed(self.country)
 
     def set(self):
-        # self.setDown(True)
         self.setIcon(QIcon(self.pressed_path))
-        # self.set_pixmap(self.pressed_path)
-        # self.repaint()
 
     def reset(self):
         self.setIcon(QIcon(self.released_path))
-        # self.setDown(False)

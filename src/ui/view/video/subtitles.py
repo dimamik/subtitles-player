@@ -1,4 +1,5 @@
 import json
+import logging
 from datetime import datetime
 
 from PyQt5.QtCore import Qt
@@ -12,10 +13,9 @@ class Subtitles(QLabel):
         super(Subtitles, self).__init__()
         self.subs_path = subs_path
         self.to_lang = to_lang
-        self.parseClass = None  # ParseSubtitlesJson(subs_path)
-        self.translator = None  # Translator(to_lang)
-        self.dictionary = None  # self.parseClass.sentences_dict
-        # self.dictionary = self.translator.translate_sentences_dict(self.dictionary)
+        self.parseClass = None
+        self.translator = None
+        self.dictionary = None
         self.show_english = False
         self.setAlignment(Qt.AlignCenter)
         self.setStyleSheet("""
@@ -37,9 +37,6 @@ class Subtitles(QLabel):
                            - self.dictionary[self.current_position - 1]["end"]) / 2
         else:
             prev_offset = 0
-        print(prev_offset, next_offset)
-        print(self.dictionary[self.current_position]["start"] + prev_offset, new_position,
-              self.dictionary[self.current_position]["end"] + next_offset)
         return self.dictionary[self.current_position]["start"] + prev_offset <= new_position <= \
                self.dictionary[self.current_position]["end"] + next_offset
 
@@ -83,6 +80,5 @@ class Subtitles(QLabel):
             "translated_sentence": self.dictionary[self.current_position][f"sentence_{self.to_lang}"],
             "language": self.to_lang}
         with open(ResourcesManager.get_user_learned(), 'a', encoding='utf-8') as file:
-            print("opened")
             file.write(json.dumps(to_write) + "\n")
-        print("ended")
+        logging.debug("subtitles: wrote sentence to file")

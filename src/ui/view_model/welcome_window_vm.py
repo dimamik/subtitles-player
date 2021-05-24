@@ -6,7 +6,7 @@ from src.youtube_downloader.youtube_downloader import YoutubeDownloader
 
 
 class Worker(QThread):
-    output = pyqtSignal(str, name="output")  # str, "output"
+    output = pyqtSignal(str, name="output")
 
     def __init__(self):
         super(Worker, self).__init__()
@@ -53,7 +53,3 @@ class WelcomeWindowVM:
     def run_thread_download_from_yt(self, url):
         self.worker.render(YoutubeDownloader.download_video, url)
         self.worker.connect_output(finish_action=self.view.finish_download_from_yt)
-
-
-if __name__ == '__main__':
-    pass

@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 import wave
 from pathlib import Path
 from typing import Optional
@@ -9,7 +8,7 @@ from pydub import AudioSegment
 from vosk import Model, KaldiRecognizer, SetLogLevel
 
 from resources.res_manager import ResourcesManager
-from src.name_generator import GenerateName
+from src.name_generator import NameGenerator
 
 SUPPORTED_EXTENSIONS = (".mp3", ".mp4", ".wav")
 
@@ -33,7 +32,6 @@ class SubtitlesGenerator:
             return None
         result = SubtitlesGenerator._generate_subtitles(new_path)
         SubtitlesGenerator._remove_tmp_file(new_path)
-        # return SubtitlesGenerator.write_to_txt(result, "../../res/subtitles", path_to_file)
         return SubtitlesGenerator.write_to_txt(result, ResourcesManager.get_resource('subtitles'), path_to_file)
 
     @classmethod
@@ -72,8 +70,8 @@ class SubtitlesGenerator:
         # create out directory if does not exists
         Path(out_path).mkdir(parents=True, exist_ok=True)
 
-        created_file_path = GenerateName.generate_name(".wav", out_path + "/",
-                                                       GenerateName.extract_filename_from_path(file_path) + "-tmp-")
+        created_file_path = NameGenerator.generate_name("wav", out_path + "/",
+                                                        NameGenerator.extract_filename_from_path(file_path) + "-tmp-")
 
         sound = AudioSegment.from_file(file_path)
         SubtitlesGenerator._convert_sound_to_mono(sound, created_file_path)
@@ -104,13 +102,8 @@ class SubtitlesGenerator:
     @classmethod
     def write_to_txt(cls, result, out_path, path_to_file):
         Path(out_path).mkdir(parents=True, exist_ok=True)
-        input_file_name = GenerateName.extract_filename_from_path(path_to_file)
-        new_path = GenerateName.generate_name(".txt", out_path, f"/{input_file_name}-sub-")
+        input_file_name = NameGenerator.extract_filename_from_path(path_to_file)
+        new_path = NameGenerator.generate_name("txt", out_path, f"/{input_file_name}-sub-")
         with open(new_path, "w") as file:
             file.write(result)
         return new_path
-
-
-if __name__ == '__main__':
-    string = sys.argv[1].replace("\\", "/")
-    SubtitlesGenerator.create_subtitles(string)

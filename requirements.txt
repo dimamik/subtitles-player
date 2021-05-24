@@ -5,4 +5,4 @@ textblob~=0.15.3
 transformers~=4.4.2
 # Codecs need to be installed http://www.codecguide.com/download_kl.htm
 pycparser~=2.20
-pytube~=10.8.1
+pytube~=10.8.2

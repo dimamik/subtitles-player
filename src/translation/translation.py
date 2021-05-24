@@ -1,10 +1,7 @@
 import logging
-import sys
 
 from textblob import TextBlob
 from textblob.exceptions import NotTranslated
-
-from src.translation.prep_translation import ParseSubtitlesJson
 
 
 class Translator:
@@ -29,10 +26,8 @@ class Translator:
         :param key:
         :return:
         """
-        print("TRANSLATING")
         for entry in list_of_dicts:
             entry[f"{key}_{self.to_lang}"] = self._translate_text(entry[key])
-        print("ENDED TRANSLATING!")
         return list_of_dicts
 
     def _translate_text(self, text):
@@ -42,8 +37,6 @@ class Translator:
             translated = blob.translate(to=self.to_lang)
         except NotTranslated:
             logging.debug("There is a word the same as input " + text)
-        except Exception:
-            logging.error("HTTP error:", sys.exc_info()[0])
         return str(translated)
 
     def translate_sentences_dict(self, sentences_dict_list, split_symbol="\n"):
@@ -73,12 +66,3 @@ class Translator:
                 sentences_dict_list[index][f"sentence_{self.to_lang}"] = sentence
                 index += 1
         return sentences_dict_list
-
-
-if __name__ == '__main__':
-    parseClass = ParseSubtitlesJson("../../resources/subtitles/small_record-sub-2021-05-10-21-47-41.txt")
-    translator_pl = Translator('pl')
-    translator_ru = Translator('be')
-    translator_pl.translate_sentences_dict(parseClass.sentences_dict)
-    translator_ru.translate_sentences_dict(parseClass.sentences_dict)
-    print(parseClass.sentences_dict)

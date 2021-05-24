@@ -1,9 +1,14 @@
 from datetime import datetime
 
 
-class GenerateName:
+class NameGenerator:
     @classmethod
     def generate_name(cls, extension, prefix=None, root=None, suffix=None):
+        """
+        Generates filename based on arguments:
+        prefix + root + current_time + suffix + "." + extension
+        :return: generated filename
+        """
         to_ret = ""
         curr_date = str(datetime.now()).replace(":", "-") \
             .replace(" ", "-").split(".")[0]
@@ -14,8 +19,7 @@ class GenerateName:
         to_ret += curr_date
         if suffix:
             to_ret += suffix
-        to_ret += extension
-
+        to_ret += "." + extension
         return to_ret
 
     @classmethod

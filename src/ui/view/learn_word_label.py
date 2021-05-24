@@ -3,14 +3,6 @@ from random import randint
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel
 
-# class LearnWordWidget(QWidget):
-#     def __init__(self):
-#         super(LearnWordWidget, self).__init__()
-#         self.index = 0
-#         self.text = TextToLearn()
-#
-#     def refresh(self, new_word):
-#         pass
 from resources.res_manager import ResourcesManager
 
 
@@ -35,7 +27,8 @@ class TextToLearn(QLabel):
             height: 150px;
             font-family: 'Raleway',sans-serif; font-size: 20px; 
             padding:0px; margin: auto;
-            font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   }
+            font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   
+            }
         ''')
 
     def set_text(self):
@@ -54,6 +47,7 @@ class TextToLearn(QLabel):
         else:
             self.setText("Learn words by saving them")
 
+    # noinspection PyUnusedLocal
     def get_next_sentence(self, event):
         if len(self.sentences) == 0:
             return
