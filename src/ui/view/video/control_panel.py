@@ -18,7 +18,7 @@ class ControlPanel(QWidget):
         self.layout.addWidget(self.state_button)
         self.layout.addWidget(self.flip_subs_button)
         self.layout.addWidget(self.save_subs_button)
-
+        # self.setFixedHeight(50)
         self.setLayout(self.layout)
 
     @staticmethod
@@ -44,7 +44,10 @@ class ProgressBar(QSlider):
             """
             
 
+ProgressBar{
+background:none;
 
+}
 
 QSlider::sub-page:horizontal {
  
@@ -119,11 +122,11 @@ class VolumeBar(QProgressBar):
                 height: 24px;
                 border: 1px solid #555;
                 border-radius: 2px;
-                background-color: #666;
+                background-color: black;
             }
 
             QProgressBar::chunk {
-                background-color: black;
+                background-color: white;
                 border-radius: 2px;
                 width: 1px;
             }
@@ -152,11 +155,11 @@ class VolumeBar(QProgressBar):
 class Button(QPushButton):
     def __init__(self, icon):
         super().__init__()
-        self.setFixedWidth(24)
-        self.setFixedHeight(24)
+        self.setFixedWidth(35)
+        self.setFixedHeight(45)
         self.setIcon(icon)
 
-        self.setIconSize(QSize(40, 50))
+        self.setIconSize(QSize(35, 45))
         self.setStyleSheet(
             """
             QPushButton{
@@ -210,15 +213,4 @@ class SaveSubsButton(Button):
         self.clicked.connect(self.save_subs)
 
     def save_subs(self):
-        print("Woosh I am saving subs :D")
         self.subtitles.write_subtitles_to_file()
-
-# if __name__ == '__main__':
-#     app = QApplication(sys.argv)
-#
-#     videoWidget = VideoWidget()
-#
-#     videoplayer = ControlPanel(videoWidget)
-#     videoWidget.resize(640, 480)
-#     videoplayer.show()
-#     sys.exit(app.exec_())

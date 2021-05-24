@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel
 
 from resources.res_manager import ResourcesManager
@@ -16,10 +17,11 @@ class Subtitles(QLabel):
         self.dictionary = None  # self.parseClass.sentences_dict
         # self.dictionary = self.translator.translate_sentences_dict(self.dictionary)
         self.show_english = False
-
+        self.setAlignment(Qt.AlignCenter)
         self.setStyleSheet("""
         Subtitles{
-            font-size: 20px;
+            font-size: 24px;
+            background:none;
         }
         """)
         self.current_position = 0

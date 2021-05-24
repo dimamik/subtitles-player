@@ -18,7 +18,7 @@ class TextToLearn(QLabel):
     def __init__(self):
         super(TextToLearn, self).__init__()
         self.mousePressEvent = self.get_next_sentence
-        self.sentences = []
+        self.sentences = [{}]
         self.index = None
         self.reload_sentences()
         self.setMinimumSize(800, 130)
@@ -39,9 +39,10 @@ class TextToLearn(QLabel):
         ''')
 
     def set_text(self):
+        # TODO Help messages can be added
         self.setText(
-            self.sentences[self.index]['translated_sentence'] + "\n" +
-            self.sentences[self.index]['original_sentence']
+            f"{self.sentences[self.index]['translated_sentence']}\n"
+            f"{self.sentences[self.index]['original_sentence']}"
         )
 
     def reload_sentences(self):

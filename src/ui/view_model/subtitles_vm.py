@@ -10,7 +10,6 @@ class SubtitlesVM:
         :param subtitles_view: previously generated view
         """
         self.subtitles_view = subtitles_view
-        pass
 
     def run_parse_and_translate(self):
         self.subtitles_view.parseClass = ParseSubtitlesJson(self.subtitles_view.subs_path)

@@ -78,6 +78,10 @@ class ResourcesManager:
                 to_ret.append(js)
         return list({v['original_sentence']: v for v in to_ret}.values())
 
+    @classmethod
+    def get_loading_gif(cls):
+        return f"{ResourcesManager.dirname}\\gifs\\loading.gif"
+
 
 if __name__ == '__main__':
     print(ResourcesManager.read_saved_subs())

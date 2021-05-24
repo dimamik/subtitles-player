@@ -46,15 +46,9 @@ class WelcomeWindowVM:
         self.worker.connect_output(finish_action=self.view.finish_create_subtitles)
 
     def run_thread_parse_and_translate_subtitles(self, subtitles):
-        print("I am here butts")
-
         subtitles_vm = SubtitlesVM(subtitles_view=subtitles)
         self.worker.render(subtitles_vm.run_parse_and_translate)
         self.worker.connect_output(finish_action=self.view.finish_translate_subtitles)
-
-    # def run_thread_get_random_sentence(self):
-    #     print("XDDD")
-    #     pass
 
     def run_thread_download_from_yt(self, url):
         self.worker.render(YoutubeDownloader.download_video, url)
