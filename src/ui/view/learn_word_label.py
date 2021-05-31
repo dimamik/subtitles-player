@@ -3,6 +3,7 @@ from random import randint
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel
 
+from resources.css_manager import CssManager
 from resources.res_manager import ResourcesManager
 
 
@@ -15,24 +16,11 @@ class TextToLearn(QLabel):
         self.reload_sentences()
         self.setMinimumSize(800, 130)
         self.setAlignment(Qt.AlignCenter)
-        self.setStyleSheet('''
-            TextToLearn{
-            color: black;
-            border-style: solid;
-            text-align: center;
-            border-width: 2px;
-            background: #863d9e;
-            padding: 20px;
-            width: 200px;
-            height: 150px;
-            font-family: 'Raleway',sans-serif; font-size: 20px; 
-            padding:0px; margin: auto;
-            font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   
-            }
-        ''')
+        self.setStyleSheet(
+            CssManager.get_css_as_string(self)
+        )
 
     def set_text(self):
-        # TODO Help messages can be added
         self.setText(
             f"{self.sentences[self.index]['translated_sentence']}\n"
             f"{self.sentences[self.index]['original_sentence']}"

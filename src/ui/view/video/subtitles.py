@@ -37,7 +37,7 @@ class Subtitles(QLabel):
                            - self.dictionary[self.current_position - 1]["end"]) / 2
         else:
             prev_offset = 0
-        return self.dictionary[self.current_position]["start"] + prev_offset <= new_position <= \
+        return self.dictionary[self.current_position]["start"] - prev_offset <= new_position <= \
                self.dictionary[self.current_position]["end"] + next_offset
 
     def update_subtitles(self, new_position):

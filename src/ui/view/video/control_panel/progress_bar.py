@@ -1,6 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QSlider
 
+from resources.css_manager import CssManager
+
 
 class ProgressBar(QSlider):
     def __init__(self, player_wrapper):
@@ -12,47 +14,7 @@ class ProgressBar(QSlider):
         self.media_player.positionChanged.connect(self.position_changed)
         self.media_player.durationChanged.connect(self.duration_changed)
         self.setStyleSheet(
-            """
-            ProgressBar{
-            background:none;
-
-            }
-
-            QSlider::sub-page:horizontal {
-
-            background: white;
-
-            border-radius: 0px;
-
-            margin-top:8px;
-
-            margin-bottom:8px;
-
-            }
-
-            QSlider::add-page:horizontal {
-
-            background: black;
-
-            border: 0px solid #777;
-
-            border-radius: 2px;
-
-            margin-top:8px;
-
-            margin-bottom:8px;
-
-            }
-            QSlider::handle:horizontal {
-
-             background-color: black;
-
-            border: 1px solid rgba(102,102,102,102);
-
-            border-radius: 7px;
-
-            }
-            """
+            CssManager.get_css_as_string(self)
         )
 
     def set_position(self, position):

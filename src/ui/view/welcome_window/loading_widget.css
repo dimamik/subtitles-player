@@ -1,0 +1,11 @@
+QWidget {
+    border: none;
+    z-index: 10;
+    background: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 72px;
+    text-align: center;
+    text-transform: uppercase;
+}

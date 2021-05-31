@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QGroupBox, QPushButton
 
+from resources.css_manager import CssManager
 from resources.res_manager import ResourcesManager
 from src.ui.view.pic_button import QIcon, QSize
 
@@ -52,19 +53,9 @@ class FlagButton(QPushButton):
         self.clicked.connect(self.on_click)
         self.flag_widget = flag_widget
         self.setCheckable(True)
-
-        self.setStyleSheet("""   
-          FlagButton{
-                animation : none;
-                backface-visibility : visible;
-                background : 0;
-                margin: 0;
-                padding:0;
-                background-attachment : scroll;
-                background-color : transparent;
-            }
-            """)
-
+        self.setStyleSheet(
+            CssManager.get_css_as_string(self)
+        )
         self.setIconSize(QSize(100, 150))
 
     def on_click(self):

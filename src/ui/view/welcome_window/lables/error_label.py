@@ -1,19 +1,16 @@
 from PyQt5.QtWidgets import QLabel
 
+from resources.css_manager import CssManager
+
 
 class ErrorLabel(QLabel):
     def __init__(self):
         super().__init__()
         self.hide()
+
         self.setStyleSheet(
-            """
-             ErrorLabel{
-                 color: red;
-                 font-family: 'Raleway',sans-serif; font-size: 20px; 
-                 font-weight: 800; line-height: 72px; margin: 0 0 24px; 
-                 text-align: center; text-transform: uppercase;
-             }
-            """)
+            CssManager.get_css_as_string(self)
+        )
 
     def pop_error(self, error_message):
         self.show()

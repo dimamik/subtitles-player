@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QLabel
 
+from resources.css_manager import CssManager
+
 
 class WelcomeMessageLabel(QLabel):
     def __init__(self):
@@ -7,15 +9,5 @@ class WelcomeMessageLabel(QLabel):
         self.setText("Welcome in Subtitles player")
         self.setFixedHeight(25)
         self.setStyleSheet(
-            """ 
-                WelcomeMessageLabel{
-                color: black;
-                background:none;
-                text-align: center;
-                font-family: 'Raleway',sans-serif; font-size: 30px; 
-                padding:0px; margin: auto;
-                font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   
-                }
-                
-            """
+            CssManager.get_css_as_string(self)
         )

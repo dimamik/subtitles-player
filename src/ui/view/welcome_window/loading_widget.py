@@ -2,6 +2,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QMovie
 from PyQt5.QtWidgets import QLabel, QVBoxLayout, QWidget, QStyleOption, QStyle
 
+from resources.css_manager import CssManager
 from resources.res_manager import ResourcesManager
 
 
@@ -16,16 +17,8 @@ class LoadingWidget(QWidget):
         self.text_messages = QVBoxLayout()
         self.loading_process = QLabel()
         self.setStyleSheet(
-            """
-                        QWidget{
-                    border: none;
-                    z-index: 10;
-                    background:none;
-                    font-family: 'Raleway',sans-serif; font-size: 20px; 
-                    font-weight: 800; line-height: 72px; text-align: center; text-transform: uppercase;   
-                    }
-            """)
-
+            CssManager.get_css_as_string(self)
+        )
         self.label = QLabel()
         self.movie = QMovie(ResourcesManager.get_loading_gif())
         self.label.setMovie(self.movie)

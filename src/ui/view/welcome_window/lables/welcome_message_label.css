@@ -1,0 +1,13 @@
+WelcomeMessageLabel {
+    color: black;
+    background: none;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    padding: 0px;
+    margin: auto;
+    font-weight: 800;
+    line-height: 72px;
+    text-align: center;
+    text-transform: uppercase;
+}

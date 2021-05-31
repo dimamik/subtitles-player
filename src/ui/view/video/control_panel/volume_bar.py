@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QProgressBar
 
+from resources.css_manager import CssManager
+
 
 class VolumeBar(QProgressBar):
     def __init__(self, player_wrapper):
@@ -14,21 +16,7 @@ class VolumeBar(QProgressBar):
         self.dragging = False
 
         self.setStyleSheet(
-            """
-            QProgressBar {
-                margin: 10px;
-                height: 24px;
-                border: 1px solid #555;
-                border-radius: 2px;
-                background-color: black;
-            }
-
-            QProgressBar::chunk {
-                background-color: white;
-                border-radius: 2px;
-                width: 1px;
-            }
-            """
+            CssManager.get_css_as_string(self)
         )
 
     def update_position(self, level):
